@@ -1,3 +1,4 @@
+#fecha as notas e salva no banco
 from tkinter import *
 from tkinter.messagebox import showerror
 import sqlite3
