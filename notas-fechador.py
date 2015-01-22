@@ -16,22 +16,25 @@ def sum_media_final():
     print(media_final)
     
     mediaVar.set(media_final)
-
-    con = sqlite3.connect('alunos.sqlite')
-    cursor = con.cursor()
-    cursor.execute("""
+    
+    if save_check.get() == 1:
+        try:
+            con = sqlite3.connect('alunos.sqlite')
+            cursor = con.cursor()
+            cursor.execute("""
                     INSERT INTO notas(aluno,primeirotrimestre,segundotrimestre,
                     terceirotrimestre,mediafinal)
                     VALUES (?,?,?,?,?)""",
                    (nomeAluno.get(), numeroPrimeiro.get(),
                     numeroSegundo.get(), numeroTerceiro.get(), media_final))
-    con.commit()
-    con.close()
-        
+ 
+            con.commit()
+            con.close()
+        except Exception as err:
+               mediaVar.set(str(err))
+    else:
+        pass
             
-    
-    
-
 def limpar_espaços():
     description.delete(0, END)
     primeiroTri.delete(0, END)
@@ -74,9 +77,9 @@ Label(app, text = "Media Final:").pack()
 Label(app, textvariable = mediaVar).pack()
 
 
-save_true = IntVar()
-check_save = Checkbutton(app, text="Salvar dados dos alunos",
-                         variable=save_true, onvalue=1, offvalue=0).pack(side=LEFT)
+save_check = BooleanVar()
+Checkbutton(app, text="Salvar dados dos alunos",
+                         variable=save_check, onvalue=True, offvalue=False).pack(side=LEFT)
 
 Button(app, text = "Sair", command = app.destroy).pack(side = LEFT)
 Button(app, text = "Limpar", command = limpar_espaços).pack(side = RIGHT)
