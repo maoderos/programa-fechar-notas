@@ -2,35 +2,40 @@ from tkinter import *
 import sqlite3
 
 
+def sanatize(nota):
+    (x, s, c) = nota.strip().split("'")
+    return s
+
 def get_students_data():
-    con = sqlite3.connect('dados_alunos.sqlite')
+    con = sqlite3.connect('alunos.sqlite')
     cursor = con.cursor()
     cursor.execute("SELECT primeirotrimestre FROM notas WHERE aluno = '%s'"
                    % aluno.get())
-    
     primeiro_trimestre = cursor.fetchall()
-    primeiro = str(primeiro_trimestre)
-    print(primeiro)
-    trimestre1.set(primeiro)
+ 
     cursor.execute("SELECT segundotrimestre FROM notas WHERE aluno = '%s'" %
                    aluno.get())
     segundo_trimestre = cursor.fetchall()
-    segundo = str(segundo_trimestre)
-    trimestre2.set(segundo)
+    
     cursor.execute("SELECT terceirotrimestre FROM notas WHERE aluno = '%s'" %
                    aluno.get())
     terceiro_trimestre = cursor.fetchall()
-    terceiro = str(terceiro_trimestre)
-    trimestre3.set(terceiro)
     cursor.execute("SELECT mediafinal FROM notas WHERE aluno = '%s'" %
                    aluno.get())
     media = cursor.fetchall()
-    final = str(media)
-    media_final.set(final)
-    
 
-  
+    primeiro = str(primeiro_trimestre)
+    trimestre1.set(sanatize(primeiro))
+    segundo = str(segundo_trimestre)
+    trimestre2.set(sanatize(segundo))
+    terceiro = str(terceiro_trimestre)
+    trimestre3.set(sanatize(terceiro))
+    final = str(media)
+    media_final.set(sanatize(final))
+    
     con.close()
+
+
 
     
 
