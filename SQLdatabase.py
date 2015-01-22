@@ -6,10 +6,10 @@ cursor = con.cursor()
 
 cursor.execute("""CREATE TABLE notas (
                 aluno TEXT NOT NULL,
-                primeirotrimestre REAL NOT NULL,
-                segundotrimestre REAL NOT NULL,
-                terceirotrimestre REAL NOT NULL,
-                mediafinal REAL NOT NULL)""")
+                primeirotrimestre TEXT NOT NULL,
+                segundotrimestre TEXT NOT NULL,
+                terceirotrimestre TEXT NOT NULL,
+                mediafinal TEXT NOT NULL)""")
 
 con.commit()
 print("OK")
