@@ -35,10 +35,6 @@ def get_students_data():
     
     con.close()
 
-
-
-    
-
 root = Tk()
 root.title('Dados dos alunos')
 Label(root, text="digie o nome do aluno que voce deseja procurar").pack()
@@ -55,7 +51,7 @@ trimestre3 = StringVar()
 Label(root,textvariable=trimestre3).pack()
 Label(root, text="MEDIA FINAL:").pack()
 media_final = StringVar()
-Label(root, textvariable= media_final)
+Label(root, textvariable= media_final).pack()
 Button(root, text='procurar', command= get_students_data).pack(side=RIGHT)
 Button(root, text='sair', command=root.destroy).pack(side=LEFT)
 root.mainloop()
