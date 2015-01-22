@@ -15,7 +15,7 @@ def sum_media_final():
     media_final = soma / 6
     print(media_final)
     
-    mediaVar.set(media_final)
+    media_var.set(media_final)
     
     if save_check.get() == 1:
         try:
@@ -31,7 +31,7 @@ def sum_media_final():
             con.commit()
             con.close()
         except Exception as err:
-               mediaVar.set(str(err))
+               media_var.set(str(err))
     else:
         pass
             
@@ -40,14 +40,13 @@ def limpar_espaços():
     primeiroTri.delete(0, END)
     segundoTri.delete(0, END)
     terceiroTri.delete(0, END)
-    mediaVar.set(0.0)
+    media_var.set(0.0)
 
 
 app = Tk()
 app.title("Fechamento de notas")
 
 Label(app, text = "REPRESENTE A VIRGULA POR PONTO. EX: 8.5").pack()
-
 Label(app, text = "Nome do Aluno:").pack()
 nomeAluno = StringVar()
 description = Entry(app, textvariable = nomeAluno)
@@ -70,11 +69,11 @@ numeroTerceiro = DoubleVar()
 terceiroTri = Entry(app, textvariable = numeroTerceiro)
 terceiroTri.pack()
 
-mediaFinal = 0 
-mediaVar = DoubleVar()
+ 
+media_var = DoubleVar()
 Button(app, text = "Fechar Nota", command = sum_media_final).pack()
 Label(app, text = "Media Final:").pack()
-Label(app, textvariable = mediaVar).pack()
+Label(app, textvariable = media_var).pack()
 
 
 save_check = BooleanVar()
